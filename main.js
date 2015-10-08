@@ -1,11 +1,14 @@
-/*global require, module*/
-'use strict';
+import AppHeader from './src/js/AppHeader';
 
-var AppHeader = require('./src/js/AppHeader');
+export default (element, options) => {
+	return getOrCreateInstance(element, options);
+};
 
-var instance;
+export const init = AppHeader.init;
 
-var getOrCreateInstance = function (element, options) {
+let instance;
+
+const getOrCreateInstance = (element, options) => {
 	if (!instance) {
 		instance = new AppHeader(element, options);
 	}
@@ -13,15 +16,9 @@ var getOrCreateInstance = function (element, options) {
 	return instance;
 };
 
-var construct = function () {
+const construct = () => {
 	getOrCreateInstance();
 	document.removeEventListener('o.DOMContentLoaded', construct);
 };
 
 document.addEventListener('o.DOMContentLoaded', construct);
-
-module.exports = function (element, options) {
-	return getOrCreateInstance(element, options);
-};
-
-module.exports.init = AppHeader.init;

@@ -2,9 +2,26 @@
 
 'use strict';
 
-var path = require('path');
-var fs = require('fs');
-var superviews = require('superviews.js');
+const path = require('path');
+const fs = require('fs');
+const superviews = require('superviews.js');
+
+const PREAMBLE = `/* jshint ignore: start */
+
+// *** DO NOT MODIFY THIS FILE ***
+// This file was generated from src/html/header.template
+// Regenerate using bin/gen-template
+
+import incrementalDom from '../../lib/incremental-dom';
+import {
+  elementOpen,
+  elementClose,
+  elementVoid,
+  text } from '../../lib/incremental-dom';
+
+export default template;
+
+`;
 
 function printUsage() {
   console.log('usage: gen-template source_file target_file');
@@ -16,33 +33,14 @@ function main(argv) {
     process.exit(1);
   }
 
-  function preamble() {
-    return [
-      '/* jshint ignore: start */',
-      '',
-      '// *** DO NOT MODIFY THIS FILE ***',
-      '// This file was generated from src/html/header.template',
-      '// Regenerate using bin/gen-template',
-      '',
-      'var incrementalDom = require(\'../../lib/incremental-dom\');',
-      'var elementOpen = incrementalDom.elementOpen;',
-      'var elementClose = incrementalDom.elementClose;',
-      'var elementVoid = incrementalDom.elementVoid;',
-      'var text = incrementalDom.text;',
-      '',
-      'module.exports = template;',
-      '\n'
-    ].join('\n');
-  }
+  const sourcePath = path.resolve(argv[0]);
+  const destPath = path.resolve(argv[1]);
 
-  var sourcePath = path.resolve(argv[0]);
-  var destPath = path.resolve(argv[1]);
+  const buffer = fs.readFileSync(sourcePath);
 
-  var buffer = fs.readFileSync(sourcePath);
+  const outStream = fs.createWriteStream(destPath);
 
-  var outStream = fs.createWriteStream(destPath);
-
-  outStream.write(preamble());
+  outStream.write(PREAMBLE);
   outStream.write(superviews(buffer));
   outStream.end();
 }

@@ -1,17 +1,15 @@
-/*global require, alert, console*/
-'use strict';
+/*global alert, console*/
 
-require('o-dropdown-menu');
-var AppHeader = require('../../main');
-var assign = require('object-assign/index');
-var forEach = require('../../src/js/utils/forEach');
+import 'o-dropdown-menu';
+import AppHeader from '../../main';
+import forEach from '../../src/js/utils/forEach';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
 	function getModeOptions() {
-		var options = {};
+		const options = {};
 
-		forEach(document.querySelectorAll('[name="mode-options"]'), function (idx, el) {
+		forEach(document.querySelectorAll('[name="mode-options"]'), (idx, el) => {
 			if (el.checked) {
 				if (el.hasAttribute('data-option-value')) {
 					options[el.value] = JSON.parse(el.getAttribute('data-option-value'));
@@ -26,40 +24,40 @@ document.addEventListener('DOMContentLoaded', function() {
 		return options;
 	}
 
-	var mode = document.querySelector('.demo-container').getAttribute('data-header-mode');
-	var modeOptions = getModeOptions();
+	const mode = document.querySelector('.demo-container').getAttribute('data-header-mode');
+	const modeOptions = getModeOptions();
 
-	var config = assign({
+	const config = Object.assign({
 		session: 'session',
 		user: { givenName: 'XXXXXXXXXXXXXXXX' },
 		mode: mode,
-		onLogin: function () {
+		onLogin: () => {
 			alert('You signed in');
 		},
-		onLogout: function () {
+		onLogout: () => {
 			alert('You signed out');
 		}
 	}, modeOptions);
 
-	var appHeader = new AppHeader(config);
+	const appHeader = new AppHeader(config);
 
 	// Help menu
-	document.addEventListener('oAppHeader.help.toggle', function () {
+	document.addEventListener('oAppHeader.help.toggle', () => {
 		alert('You toggled help');
 		console.log('oAppHeader.help.toggle');
 	});
 
 	// Login/logout events
-	document.addEventListener('oAppHeader.login', function () {
+	document.addEventListener('oAppHeader.login', () => {
 		console.log('oAppHeader.login');
 	});
 
-	document.addEventListener('oAppHeader.logout', function () {
+	document.addEventListener('oAppHeader.logout', () => {
 		console.log('oAppHeader.logout');
 	});
 
 	// Select mode option
-	document.getElementById('mode-options').addEventListener('change', function (e) {
+	document.getElementById('mode-options').addEventListener('change', () => {
 		appHeader.setMode(mode, getModeOptions());
 	});
 });

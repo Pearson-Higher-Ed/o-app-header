@@ -4,13 +4,14 @@
 // This file was generated from src/html/header.template
 // Regenerate using bin/gen-template
 
-var incrementalDom = require('../../lib/incremental-dom');
-var elementOpen = incrementalDom.elementOpen;
-var elementClose = incrementalDom.elementClose;
-var elementVoid = incrementalDom.elementVoid;
-var text = incrementalDom.text;
+import incrementalDom from '../../lib/incremental-dom';
+import {
+  elementOpen,
+  elementClose,
+  elementVoid,
+  text } from '../../lib/incremental-dom';
 
-module.exports = template;
+export default template;
 
 function template (data, handlers, translate) {
   elementOpen("div", null, ["class", "o-header__container"])

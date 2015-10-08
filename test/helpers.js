@@ -1,67 +1,65 @@
-'use strict';
+import { dispatchEvent } from '../src/js/utils/dom';
 
-var dispatchEvent = require('../src/js/utils/dom').dispatchEvent;
-
-exports.getHeaderEl = function () {
+export function getHeaderEl() {
 	return document.querySelector('.o-app-header');
-};
+}
 
-exports.getLogoEl = function (headerEl) {
+export function getLogoEl(headerEl) {
 	return headerEl.querySelector('.o-header__logo');
-};
+}
 
-exports.getHelpNavItemEl = function (headerEl) {
+export function getHelpNavItemEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__nav-item-help');
-};
+}
 
-exports.getSignInNavItemEl = function (headerEl) {
+export function getSignInNavItemEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__nav-item-sign-in');
-};
+}
 
-exports.getMenuNavItemEl = function (headerEl) {
+export function getMenuNavItemEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__nav-item-menu');
-};
+}
 
-exports.getMenuMenuEl = function (headerEl) {
+export function getMenuMenuEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__menu-menu');
-};
+}
 
-exports.getAllCoursesMenuItemEl = function (headerEl) {
+export function getAllCoursesMenuItemEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__menu-item-all-courses');
-};
+}
 
-exports.getCourseMenuItemEls = function (headerEl) {
+export function getCourseMenuItemEls(headerEl) {
 	return headerEl.querySelectorAll('.o-app-header__menu-item-course');
-};
+}
 
-exports.getCourseNavMenuItemEls = function (headerEl) {
+export function getCourseNavMenuItemEls(headerEl) {
 	return headerEl.querySelectorAll('.o-app-header__menu-item-course-nav');
-};
+}
 
-exports.getMenuItemEls = function (headerEl) {
+export function getMenuItemEls(headerEl) {
 	return headerEl.querySelectorAll('.o-app-header__menu-item');
-};
+}
 
-exports.getMyAccountMenuItemEl = function (headerEl) {
+export function getMyAccountMenuItemEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__menu-item-my-account');
-};
+}
 
-exports.getSignOutMenuItemEl = function (headerEl) {
+export function getSignOutMenuItemEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__menu-item-sign-out');
-};
+}
 
-exports.getUsernameEl = function (headerEl) {
+export function getUsernameEl(headerEl) {
 	return headerEl.querySelector('.o-app-header__username');
-};
+}
 
-exports.clickSignIn = function (headerEl) {
-	var signInNavItemEl = exports.getSignInNavItemEl(headerEl);
+export function clickSignIn(headerEl) {
+	const signInNavItemEl = getSignInNavItemEl(headerEl);
 
 	dispatchEvent(signInNavItemEl.querySelector('a'), 'click');
-};
+}
 
-exports.clickSignOut = function (headerEl) {
-	var signOutMenuItemEl = exports.getSignOutMenuItemEl(headerEl);
+export function clickSignOut(headerEl) {
+	const signOutMenuItemEl = getSignOutMenuItemEl(headerEl);
 
 	dispatchEvent(signOutMenuItemEl.querySelector('a'), 'click');
-};
+}

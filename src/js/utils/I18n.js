@@ -1,23 +1,21 @@
-'use strict';
+export default class I18n{
 
-var assign = require('object-assign/index');
+	constructor(options) {
+		options = Object.assign({}, I18n.defaultSettings, options);
+		this.keys = I18n.strings[options.locale] || I18n.strings.en;
+	}
 
-module.exports = I18n;
+	translate(key) {
+		return this.keys[key] || key;
+	}
 
-function I18n(options) {
-	var settings = assign({}, this.defaultSettings, options);
-	this.keys = this.strings[settings.locale] || this.strings.en;
 }
 
-I18n.prototype.defaultSettings = {
+I18n.defaultSettings = {
 	locale: 'en'
 };
 
-I18n.prototype.translate = function (key) {
-	return this.keys[key] || key;
-};
-
-I18n.prototype.strings = {
+I18n.strings = {
 	en: {
 		'All courses': 'All courses',
 		'Help': 'Help',

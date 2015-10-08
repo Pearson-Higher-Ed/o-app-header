@@ -1,19 +1,18 @@
 /*global describe, it, before*/
-'use strict';
 
-var expect = require('expect.js');
-var dispatchEvent = require('../src/js/utils/dom').dispatchEvent;
-var AppHeader = require('../main');
+import expect from 'expect.js';
+import AppHeader from '../main';
+import { dispatchEvent } from '../src/js/utils/dom';
 
-describe('o.DOMContentLoaded', function () {
+describe('o.DOMContentLoaded', () => {
 
-	before(function () {
+	before(() => {
 		document.body.innerHTML = '';
 	});
 
-	it('should prepend to document.body', function (done) {
-		document.addEventListener('o.DOMContentLoaded', function () {
-			var appHeaderEl = document.body.firstChild;
+	it('should prepend to document.body', (done) => {
+		document.addEventListener('o.DOMContentLoaded', () => {
+			const appHeaderEl = document.body.firstChild;
 
 			expect(document.body.children.length).to.be(1);
 			expect(appHeaderEl).to.not.be(null);
@@ -26,11 +25,11 @@ describe('o.DOMContentLoaded', function () {
 		dispatchEvent(document, 'o.DOMContentLoaded');
 	});
 
-	it('should not construct a new element if one already exists', function (done) {
+	it('should not construct a new element if one already exists', (done) => {
 		new AppHeader();
 
-		document.addEventListener('o.DOMContentLoaded', function () {
-			var appHeaderEl = document.body.firstChild;
+		document.addEventListener('o.DOMContentLoaded', () => {
+			const appHeaderEl = document.body.firstChild;
 
 			expect(document.body.children.length).to.be(1);
 			expect(appHeaderEl).to.not.be(null);
@@ -45,9 +44,9 @@ describe('o.DOMContentLoaded', function () {
 
 });
 
-describe('new AppHeader()', function () {
+describe('new AppHeader()', () => {
 
-	it('should return the same instance', function () {
+	it('should return the same instance', () => {
 		expect(new AppHeader()).to.be(new AppHeader());
 	});
 
