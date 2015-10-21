@@ -6,6 +6,12 @@ import template from './template';
 import I18n from './utils/I18n';
 import DropdownMenu from 'o-dropdown-menu';
 
+const CSS_CLASSES = ['o-app-header', 'o-header', 'o-header--fixed'];
+const MODES = ['Signed Out', 'Basic', 'Course', 'Integration', 'Legacy Course'];
+const MAX_COURSE_ITEMS = 5;
+const LOGIN_EVENT = 'oAppHeader.login';
+const LOGOUT_EVENT = 'oAppHeader.logout';
+
 export default class AppHeader {
 
 	/**
@@ -15,13 +21,6 @@ export default class AppHeader {
 	 * @return {undefined} undefined
 	 */
 	constructor(element, options) {
-		this.constants_ = {
-			MODES: ['Signed Out', 'Basic', 'Course', 'Integration', 'Legacy Course'],
-			MAX_COURSE_ITEMS: 5,
-			LOGIN_EVENT: 'oAppHeader.login',
-			LOGOUT_EVENT: 'oAppHeader.logout'
-		};
-
 		this.init(element, options);
 	}
 
@@ -92,7 +91,7 @@ export default class AppHeader {
 	}
 
 	validateSettings_(settings) {
-		if (this.constants_.MODES.indexOf(settings.mode) === -1) {
+		if (MODES.indexOf(settings.mode) === -1) {
 			throw new TypeError('Unrecognized mode, \'' + settings.mode + '\'');
 		}
 	}
@@ -128,10 +127,8 @@ export default class AppHeader {
 	constructRootEl_() {
 		const element = document.createElement('header');
 
-		element.classList.add('o-app-header');
 		element.setAttribute('role', 'banner');
-		element.classList.add('o-header');
-		element.classList.add('o-header--fixed');
+		CSS_CLASSES.forEach(cssClass => element.classList.add(cssClass));
 
 		element.addEventListener('oDropdownMenu.expand', function (e) {
 			forEach(e.target.querySelectorAll('.o-app-header__icon'), function (idx, item) {
@@ -202,9 +199,9 @@ export default class AppHeader {
 			let courseItems = get(this.state_, 'courseItems') || [];
 			let courseItemsExceedsMax = false;
 
-			if (courseItems.length > this.constants_.MAX_COURSE_ITEMS) {
+			if (courseItems.length > MAX_COURSE_ITEMS) {
 				courseItemsExceedsMax = true;
-				courseItems = courseItems.slice(0, this.constants_.MAX_COURSE_ITEMS);
+				courseItems = courseItems.slice(0, MAX_COURSE_ITEMS);
 			}
 
 			if (courseItems.length) {
@@ -314,7 +311,7 @@ export default class AppHeader {
 			// Sign Out
 			menuItems.push(createMenuItemDef({
 				text: this.i18n_.translate('Sign Out'),
-				onClick: this.getHandler_('onLogout', this.constants_.LOGOUT_EVENT)
+				onClick: this.getHandler_('onLogout', LOGOUT_EVENT)
 			}, {
 				classes: ['o-app-header__menu-item-sign-out']
 			}));
@@ -356,7 +353,7 @@ export default class AppHeader {
 		const data = this.getDataForRender_();
 
 		const handlers = {
-			handleLogin: this.getHandler_('onLogin', this.constants_.LOGIN_EVENT),
+			handleLogin: this.getHandler_('onLogin', LOGIN_EVENT),
 			handleHelpNavItemClick: this.handleHelpNavItemClick_.bind(this)
 		};
 
