@@ -8,7 +8,7 @@ var patch = require('../../lib/incremental-dom').patch;
 var template = require('./template');
 var I18n = require('./utils/I18n');
 var DropdownMenu = require('o-dropdown-menu');
-var NotificationComponent = require("notification-component");
+var NotificationComponent = require('notification-component');
 
 module.exports = AppHeader;
 
@@ -452,7 +452,7 @@ AppHeader.prototype.handleHelpNavItemClick_ = function (e) {
 
 
 AppHeader.prototype.renderNotification_ = function(notificationConfig) {
-	var menuItem = document.getElementsByClassName("o-header__nav-item o-app-header__nav-item-notification")[0];
+	var menuItem = document.getElementsByClassName('o-header__nav-item o-app-header__nav-item-notification')[0];
   	NotificationComponent.getInstance(notificationConfig).attachComponent(menuItem);
 };
 
