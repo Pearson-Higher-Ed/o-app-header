@@ -22,6 +22,7 @@ var getSignOutMenuItemEl = helpers.getSignOutMenuItemEl;
 var getUsernameEl = helpers.getUsernameEl;
 var clickSignIn = helpers.clickSignIn;
 var clickSignOut = helpers.clickSignOut;
+var getNotificationEl = helpers.getNotificationEl;
 
 describe('AppHeader:', function () {
 
@@ -757,6 +758,26 @@ describe('AppHeader:', function () {
 				.to.throwException(/Expected \'onLogout\' to be a function/);
 		});
 
+	});
+
+	describe('appHeader.renderNotification', function() {
+
+		it('should not render notification if no config is passed in', function() {
+			var appHeader = new AppHeader();
+			var appHeaderEl = getHeaderEl();
+			var notificationEl = getNotificationEl(appHeaderEl);
+
+			expect(notificationEl.childNodes.length).to.be(0);
+
+		});
+
+		it('should render notification when config exists', function() {
+			var appHeader = new AppHeader({notifications:"notificationConfig"});
+			var appHeaderEl = getHeaderEl();
+			var notificationEl = getNotificationEl(appHeaderEl);
+
+			expect(notificationEl.childNodes.length).to.be.greaterThan(0);
+		});
 	});
 
 });
