@@ -65,3 +65,7 @@ exports.clickSignOut = function (headerEl) {
 
 	dispatchEvent(signOutMenuItemEl.querySelector('a'), 'click');
 };
+
+exports.getNotificationEl = function(headerEl) {
+	return headerEl.querySelector('.o-app-header__nav-item-notification');
+}

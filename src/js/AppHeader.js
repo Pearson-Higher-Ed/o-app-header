@@ -8,6 +8,7 @@ var patch = require('../../lib/incremental-dom').patch;
 var template = require('./template');
 var I18n = require('./utils/I18n');
 var DropdownMenu = require('o-dropdown-menu');
+var NotificationComponent = require('prsn.notification-component');
 
 module.exports = AppHeader;
 
@@ -91,7 +92,8 @@ AppHeader.prototype.init = function (element, options) {
 		element.parentNode.removeChild(element);
 	}
 
-	this.render_();
+	this.render_(settings);
+
 };
 
 
@@ -130,7 +132,8 @@ AppHeader.prototype.setMode = function (mode, options) {
  */
 AppHeader.prototype.setState_ = function (newState, update) {
 	this.state_ = assign({}, this.state_, newState);
-	if (update) this.render_();
+	var settings = this.getSettings_();
+	if (update) this.render_(settings);
 };
 
 
@@ -401,7 +404,7 @@ AppHeader.prototype.getHandler_ = function (prop, eventName) {
 };
 
 
-AppHeader.prototype.render_ = function () {
+AppHeader.prototype.render_ = function (settings) {
 	var element = this.element;
 	var i18n = this.i18n_;
 
@@ -419,6 +422,10 @@ AppHeader.prototype.render_ = function () {
 		DropdownMenu.init(element);
 		dom.dispatchEvent(element, 'oAppHeader.didUpdate');
 	});
+
+	if(settings.notifications) {
+		this.renderNotification_(settings.notifications);
+	}
 };
 
 
@@ -441,6 +448,12 @@ AppHeader.prototype.handleHelpNavItemClick_ = function (e) {
 	}
 
 	dom.dispatchEvent(this.element, 'oAppHeader.help.toggle');
+};
+
+
+AppHeader.prototype.renderNotification_ = function(notificationConfig) {
+	var menuItem = document.getElementsByClassName('o-header__nav-item o-app-header__nav-item-notification')[0];
+  	NotificationComponent.getInstance(notificationConfig).attachComponent(menuItem);
 };
 
 function noop() {}

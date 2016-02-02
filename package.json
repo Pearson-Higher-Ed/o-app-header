@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "o-app-header",
-  "version": "1.0.0",
+  "version": "1.1.0-wip",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
@@ -29,5 +29,8 @@
     "superviews.js": "0.0.5",
     "textrequireify": "^2.1.1",
     "travis-multirunner": "^2.7.0"
+  },
+  "dependencies": {
+    "prsn.notification-component": "0.0.3"
   }
 }
