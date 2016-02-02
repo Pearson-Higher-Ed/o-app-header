@@ -31,6 +31,6 @@
     "travis-multirunner": "^2.7.0"
   },
   "dependencies": {
-    "prsn.notification-component": "0.0.2"
+    "prsn.notification-component": "0.0.3"
   }
 }
