@@ -8,7 +8,7 @@ var patch = require('../../lib/incremental-dom').patch;
 var template = require('./template');
 var I18n = require('./utils/I18n');
 var DropdownMenu = require('o-dropdown-menu');
-var NotificationComponent = require('notification-component');
+var NotificationComponent = require('prsn.notification-component');
 
 module.exports = AppHeader;
 
