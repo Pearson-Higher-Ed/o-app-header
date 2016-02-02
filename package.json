@@ -25,10 +25,12 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-sinon": "^1.0.4",
     "mocha": "^2.1.0",
-    "prsn.notification-component": "0.0.2",
     "sinon": "^1.15.3",
     "superviews.js": "0.0.5",
     "textrequireify": "^2.1.1",
     "travis-multirunner": "^2.7.0"
+  },
+  "dependencies": {
+    "prsn.notification-component": "0.0.2"
   }
 }
